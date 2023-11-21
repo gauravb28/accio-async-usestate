@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Posts = () => {
   const [allPosts, setAllPosts] = useState([
@@ -62,8 +62,39 @@ const Posts = () => {
     // );
   };
 
+  const getInitialTheme = () => {
+    return localStorage.getItem('theme')
+      ? localStorage.getItem('theme')
+      : 'light-theme';
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme());
+
+  const handleToggle = () => {
+    if (theme === 'light-theme') {
+      setTheme('dark-theme');
+    } else {
+      setTheme('light-theme');
+    }
+  };
+
+  useEffect(() => {
+    if (theme === 'dark-theme') {
+      document.documentElement.classList.remove('light-theme');
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.documentElement.classList.remove('dark-theme');
+      document.documentElement.classList.add('light-theme');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <div>
+      <button className="change-theme" onClick={handleToggle}>
+        Toggle
+      </button>
+
       <h2>Filters</h2>
       <div>
         <label htmlFor="userId">User ID:</label>

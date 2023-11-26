@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import Button from '@mui/material/Button';
 
 const Login = () => {
   const [password, setPassword] = useState('');
@@ -7,6 +8,7 @@ const Login = () => {
 
   return (
     <div>
+      <Button variant="contained">Hello world</Button>
       <h1>Password</h1>
       <label htmlFor="password">Password: </label>
       <input
